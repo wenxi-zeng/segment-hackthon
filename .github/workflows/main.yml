@@ -24,7 +24,7 @@ jobs:
                -X POST \
                -H "Authorization: token $GITHUB_TOKEN" \
                   https://api.github.com/repos/wenxi-zeng/segment-hackthon/releases \
-               -d '{"tag_name": "${{ RELEASE_VERSION }}", "target_commitish": "main", "name": "${{ RELEASE_VERSION }}", "body": "Release of version ${{ RELEASE_VERSION }}", "draft": false, "prerelease": false, "generate_release_notes": true}'
+               -d '{"tag_name": "${{ env.RELEASE_VERSION }}", "target_commitish": "main", "name": "${{ env.RELEASE_VERSION }}", "body": "Release of version ${{ env.RELEASE_VERSION }}", "draft": false, "prerelease": false, "generate_release_notes": true}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
