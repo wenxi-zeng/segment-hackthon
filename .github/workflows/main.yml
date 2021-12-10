@@ -15,7 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - run: gh release create v0.0.1 --target main
+      - name: create release
+      - run: |
+            curl \
+               -X POST \
+               -H "Authorization: token $GITHUB_TOKEN" \
+                  https://api.github.com/repos/wenxi-zeng/segment-hackthon/releases \
+               -d '{"tag_name": "v0.0.3", "target_commitish": "main", "name": "v0.0.3", "body": "Release of version v0.0.3", "draft": false, "prerelease": false, "generate_release_notes": true}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
