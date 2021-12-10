@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - run: gh release create v0.0.1 --target main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
