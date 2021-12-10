@@ -15,10 +15,10 @@ jobs:
       - name: Get the version
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-      -name: Verify tag
-       run: |
+      - name: Verify tag
+        run: |
             VERSION=$(grep VERSION_NAME gradle.properties | awk -F= '{ print $2 }' | sed "s/-SNAPSHOT//")
-            if [ "${{ steps.vars.outputs.tag }}" != "$VERSION" ]; then {
+            if [ "${{ steps.vars.outputs.tag }}" != "v$VERSION" ]; then {
               echo "Tag ${{ steps.vars.outputs.tag }} does not match the package version ($VERSION)"
               exit 1
             } fi
