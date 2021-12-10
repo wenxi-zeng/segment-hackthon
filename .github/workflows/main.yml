@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: create release
-      - run: |
+        run: |
             curl \
                -X POST \
                -H "Authorization: token $GITHUB_TOKEN" \
