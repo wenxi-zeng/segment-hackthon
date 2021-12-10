@@ -15,12 +15,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: create release
         run: |
             curl \
                -X POST \
                -H "Authorization: token $GITHUB_TOKEN" \
                   https://api.github.com/repos/wenxi-zeng/segment-hackthon/releases \
-               -d '{"tag_name": "v0.0.3", "target_commitish": "main", "name": "v0.0.3", "body": "Release of version v0.0.3", "draft": false, "prerelease": false, "generate_release_notes": true}'
+               -d '{"tag_name": ${{ steps.get_version.outputs.VERSION }}, "target_commitish": "main", "name": ${{ steps.get_version.outputs.VERSION }}, "body": "Release of version ${{ steps.get_version.outputs.VERSION }}", "draft": false, "prerelease": false, "generate_release_notes": true}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
